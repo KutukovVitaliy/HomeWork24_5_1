@@ -44,7 +44,7 @@ int main() {
         else if(command == "status"){
             std::cout << "Completed tasks: " << std::endl;
             for(auto const it : completedTask){
-                std::cout << "Name: " << it.name << "   time: " << static_cast<float>((it.endTime - it.beginTime)) / 3600 << std::endl;
+                std::cout << "Name: " << it.name << "   time: " << std::difftime(it.endTime, it.beginTime) / 3600 << std::endl;
             }
             if(!currentTask.empty()){
                 std::cout << "Current task:" << std::endl;
