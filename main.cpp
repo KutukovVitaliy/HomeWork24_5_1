@@ -13,7 +13,7 @@ int main() {
     task tmpTask;
     do{
         std::cout << "Enter command: ";
-        std::cin >> command;
+        std::getline(std::cin,command);
         if(command == "begin"){
             if(!currentTask.empty()){
                 currentTask.at(0).endTime = std::time(nullptr);
@@ -21,7 +21,7 @@ int main() {
                 currentTask.erase(currentTask.begin());
             }
             std::cout << "Enter the name of the new task: ";
-            std::cin >> tmpTask.name;
+            std::getline(std::cin,tmpTask.name);
             tmpTask.beginTime = std::time(nullptr);
             if(currentTask.empty()){
                 currentTask.push_back(tmpTask);
@@ -43,7 +43,7 @@ int main() {
         }
         else if(command == "status"){
             std::cout << "Completed tasks: " << std::endl;
-            for(auto it : completedTask){
+            for(auto const it : completedTask){
                 std::cout << "Name: " << it.name << "   time: " << static_cast<float>((it.endTime - it.beginTime)) / 3600 << std::endl;
             }
             if(!currentTask.empty()){
@@ -55,10 +55,7 @@ int main() {
             std::cout << "Bad command. Try again!" << std::endl;
         }
     }while(command != "exit");
-    //std::time_t t = std::time(nullptr);
-    //std::tm* local = std::localtime(&t);
-    //std::cout << local->tm_hour << ":" << local->tm_min << "  " << local->tm_year <<  std::endl;
-    //std::cout << std::asctime(local) << std::endl;
-    std::cout << "Hello, World!" << std::endl;
+
+
     return 0;
 }
