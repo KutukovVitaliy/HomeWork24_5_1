@@ -25,10 +25,11 @@ int main() {
             tmpTask.beginTime = std::time(nullptr);
             if(currentTask.empty()){
                 currentTask.push_back(tmpTask);
-                std::cout << "An error occurred when adding a new task!" << std::endl;
+                std::cout << "The new task: " << tmpTask.name << " was successfully added!" << std::endl;
+
             }
             else{
-                std::cout << "The new task: " << tmpTask.name << " was successfully added!" << std::endl;
+                std::cout << "An error occurred when adding a new task!" << std::endl;
             }
         }
         else if(command == "end"){
@@ -38,19 +39,26 @@ int main() {
                 std::cout << "The current task " << currentTask.at(0).name << " was successfully completed!" << std::endl;
                 currentTask.erase(currentTask.begin());
             }
-            std::cout << "An error occurred when completing a task!" << std::endl;
+            else std::cout << "An error occurred when completing a task!" << std::endl;
         }
         else if(command == "status"){
-            std::cout << "" << std::endl;
+            std::cout << "Completed tasks: " << std::endl;
+            for(auto it : completedTask){
+                std::cout << "Name: " << it.name << "   time: " << static_cast<float>((it.endTime - it.beginTime)) / 3600 << std::endl;
+            }
+            if(!currentTask.empty()){
+                std::cout << "Current task:" << std::endl;
+                std::cout << "Name: " << currentTask.at(0).name << std::endl;
+            }
         }
         else {
             std::cout << "Bad command. Try again!" << std::endl;
         }
     }while(command != "exit");
-    std::time_t t = std::time(nullptr);
-    std::tm* local = std::localtime(&t);
-    std::cout << local->tm_hour << ":" << local->tm_min << "  " << local->tm_year <<  std::endl;
-    std::cout << std::asctime(local) << std::endl;
+    //std::time_t t = std::time(nullptr);
+    //std::tm* local = std::localtime(&t);
+    //std::cout << local->tm_hour << ":" << local->tm_min << "  " << local->tm_year <<  std::endl;
+    //std::cout << std::asctime(local) << std::endl;
     std::cout << "Hello, World!" << std::endl;
     return 0;
 }
